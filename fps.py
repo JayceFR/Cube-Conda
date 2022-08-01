@@ -12,7 +12,7 @@ class fpsClass():
         self.fpss = 4
 
     def normal_fps(self):
-        self.fpss = 30
+        self.fpss = 60
 
     def isNormal(self):
         if self.fpss == 4:
