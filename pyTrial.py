@@ -252,6 +252,13 @@ def draw_text(text, font, text_col, x, y):
 
 def main():
     run = True
+    snake = pygame.image.load("Sprites/snake.png").convert_alpha()
+    snake = pygame.transform.scale(snake, (snake.get_width()* 5, snake.get_height() * 5))
+    snake.set_colorkey((255, 255, 255))
+    snake_lft = pygame.image.load("Sprites/snake.png").convert_alpha()
+    snake_lft = pygame.transform.scale(snake_lft, (snake_lft.get_width() * 5, snake_lft.get_height() * 5))
+    snake_lft = pygame.transform.flip(snake_lft, True, False)
+    snake_lft.set_colorkey((255,255,255))
     font = pygame.font.Font("Fonts/jayce.ttf", 30)
     font2 = pygame.font.Font("Fonts/jayce.ttf", 60)
     inside_color = [(255, 0, 255)]
@@ -285,6 +292,8 @@ def main():
         draw_text(text, font, (255, 255, 255), text_x, 252)
         draw_text("CUBE  CONDA", font2, (255,255,255), 100, 10)
         draw_text("JayJan", font, (255,255,255),195,60)
+        display.blit(snake, (370,240))
+        display.blit(snake_lft, (0, 240))
         display.blit(player[frame], (150, 187))
         if play_btn_inside.collidepoint(mx, my):
             inside_color.clear()
