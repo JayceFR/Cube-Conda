@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="added snakes in menu">
+    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="fixed map and improved on the menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyTrial.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyTrial.py" afterDir="false" />
     </list>
@@ -123,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659366231903</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixed map and improved on the menu">
+      <created>1659369167883</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1659369167883</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +149,7 @@
     <MESSAGE value="added framerate independence" />
     <MESSAGE value="modified framerate independence" />
     <MESSAGE value="added snakes in menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="added snakes in menu" />
+    <MESSAGE value="fixed map and improved on the menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed map and improved on the menu" />
   </component>
 </project>

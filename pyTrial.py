@@ -259,6 +259,9 @@ def main():
     snake_lft = pygame.transform.scale(snake_lft, (snake_lft.get_width() * 5, snake_lft.get_height() * 5))
     snake_lft = pygame.transform.flip(snake_lft, True, False)
     snake_lft.set_colorkey((255,255,255))
+    cube = pygame.image.load("Sprites/cube.png")
+    cube = pygame.transform.scale(cube, (cube.get_width() * 2, cube.get_height() * 2))
+    cube.set_colorkey((255,255,255))
     font = pygame.font.Font("Fonts/jayce.ttf", 30)
     font2 = pygame.font.Font("Fonts/jayce.ttf", 60)
     inside_color = [(255, 0, 102)]
@@ -296,8 +299,8 @@ def main():
         for circle in sorted(circles, reverse= True):
             pygame.draw.circle(display, (255, 0, 102), (circle[0][0], circle[0][1]), circle[1])
             pygame.draw.circle(display, (0,0,0), (circle[0][0], circle[0][1]), circle[1] - 2)
-            circle[0][1] += 1.5
-            circle[1] -= 0.2
+            circle[0][1] += 1
+            circle[1] -= 0.1
             if circle[1] <= 0:
                 circles.remove(circle)
         play_btn_outline = pygame.Rect(150, 250, 200, 50)
@@ -310,7 +313,7 @@ def main():
         display.blit(snake, (370,240))
         display.blit(snake_lft, (0, 240))
         display.blit(player[frame], (150, 187))
-
+        display.blit(cube, (210, 194))
         if play_btn_inside.collidepoint(mx, my):
             inside_color.clear()
             inside_color.append((10, 10, 10))
