@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="fixed map and improved on the menu">
+    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="added cube in menu">
+      <change afterPath="$PROJECT_DIR$/Map/level_0.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sprites/Up_Arrow.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Map/map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyTrial.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyTrial.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,19 +24,22 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2C3lZl5kOfwh73PvmlBcHpVVZ64" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jayce/PycharmProjects/GameProject&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/jayce/PycharmProjects/GameProject",
+    "settings.editor.selected.configurable": "editor.preferences.appearance"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Sprites" />
@@ -130,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659369167883</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added cube in menu">
+      <created>1659369865456</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659369865456</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -145,11 +159,13 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="changed the fps to 60" />
     <MESSAGE value="added framerate independence" />
     <MESSAGE value="modified framerate independence" />
     <MESSAGE value="added snakes in menu" />
     <MESSAGE value="fixed map and improved on the menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed map and improved on the menu" />
+    <MESSAGE value="added cube in menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="added cube in menu" />
   </component>
 </project>

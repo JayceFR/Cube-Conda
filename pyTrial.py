@@ -100,12 +100,16 @@ def load_level(level):
     enemy_spawn_loc = []
     key_spawn_loc = []
     snake_spawn_loc = []
+    up_arrow = pygame.image.load("Sprites/Up_Arrow.png")
+    up_arrow.set_colorkey((255,255,255))
+    tutorial_text = [ "Press J to transform into a cube", "Turn into a cube and dodge the ", "Collect the keys on the way by ", "WELL DONE! YOU HAVE LEARNT THE MECHANICS!",  "which does not obey gravity", "cube pieces as well as condas", "transforming into cube and then man", "Arrow keys or WASD for movement", "And Space for jump"]
     ticks_after_death = 0
     time_after_death = 0
     death_time_delay = 100
+    summon = 0
     level_over = False
-    game_map, enemy_spawn_loc, key_spawn_loc, snake_spawn_loc, door_loc = m.draw_map(display, grass, dirt1, dirt2,
-                                                                                     scroll)
+    game_map, enemy_spawn_loc, key_spawn_loc, snake_spawn_loc, door_loc, end, text_loc = m.draw_map(display, grass, dirt1, dirt2, up_arrow, scroll)
+    font = pygame.font.Font("Fonts/jayce.ttf", 16)
     door_img = pygame.image.load("Sprites/door.png")
     door_img.set_colorkey((116, 68, 56))
     door_img = pygame.transform.scale(door_img, (door_img.get_height() * 3, door_img.get_width() * 3))
@@ -114,7 +118,7 @@ def load_level(level):
     p = framework.Player(50, 70, 32, 32, (255, 0, 0), 4, "player", cube_img, player_idle_spritesheet,
                          player_run_spritesheet, player_jump_spritesheet)
     while run:
-        display.fill((98, 255, 242))
+        display.fill((100, 100, 100))
         clock.tick(frames_per_sec.get_fps())
         ticks = pygame.time.get_ticks()
         ticks_after_death += 1
@@ -142,12 +146,18 @@ def load_level(level):
                 for enemy_loc in enemy_spawn_loc:
                     load_enemy(enemy_loc[0], enemy_loc[1])
             enemy_load_last_update = ticks
-
-        if ticks - snake_loading_last_update > snake_loading_delay:
-            if snake_spawn_loc != []:
-                for snake_loc in snake_spawn_loc:
-                    load_snake(snake_loc[0], snake_loc[1])
-            snake_loading_last_update = ticks
+        if level == "Map/level_0.txt":
+            if p.special_get_rect().x >= 1100:
+                summon += 1
+                if summon == 1:
+                    for snake_loc in snake_spawn_loc:
+                        load_snake(snake_loc[0], snake_loc[1])
+        else:
+            if ticks - snake_loading_last_update > snake_loading_delay:
+                if snake_spawn_loc != []:
+                    for snake_loc in snake_spawn_loc:
+                        load_snake(snake_loc[0], snake_loc[1])
+                snake_loading_last_update = ticks
 
         if p.get_state() == "player":
             true_scroll[0] += (p.get_rect().x - true_scroll[0] - 262) / 20
@@ -169,8 +179,11 @@ def load_level(level):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_j:
                     p.change_state(game_map, current_time)
-        game_map, enemy_spawn_loc, key_spawn_loc1, snake_spawn_loc, door_loc = m.draw_map(display, grass, dirt1, dirt2,
+        game_map, enemy_spawn_loc, key_spawn_loc1, snake_spawn_loc, door_loc, end, text_loc = m.draw_map(display, grass, dirt1, dirt2, up_arrow,
                                                                                           scroll)
+        if text_loc != []:
+            for te, text in enumerate(text_loc):
+                draw_text(tutorial_text[te], font, (255,255,255), text[0] - scroll[0], text[1] - scroll[1], display)
         p.move(5, game_map, current_time, dt)
         p.draw(display, scroll)
         draw_timer(display, cube_time, 20, 20)
@@ -179,8 +192,12 @@ def load_level(level):
         if level_over:
             p.alive = False
 
+
         if p.alive:
             ticks_after_death = 0
+            if p.special_get_rect().y > end[0][1]:
+                print("I am dead")
+                p.alive = False
             if p.state == "cube":
                 if cube_time > 0:
                     # pass
@@ -245,7 +262,7 @@ def load_level(level):
         pygame.display.update()
 
 
-def draw_text(text, font, text_col, x, y):
+def draw_text(text, font, text_col, x, y, display):
     img = font.render(text, True, text_col)
     display.blit(img, (x, y))
 
@@ -307,9 +324,9 @@ def main():
         pygame.draw.rect(display, outside_color[0], play_btn_outline, 20, 50)
         play_btn_inside = pygame.Rect(157, 255, 185, 35)
         pygame.draw.rect(display, inside_color[0], play_btn_inside, 0, 50)
-        draw_text(text, font, (255, 255, 255), text_x, text_y)
-        draw_text("CUBE  CONDA", font2, (255,255,255), 100, 10)
-        draw_text("JayJan", font, (255,255,255),195,60)
+        draw_text(text, font, (255, 255, 255), text_x, text_y, display)
+        draw_text("CUBE  CONDA", font2, (255,255,255), 100, 10, display)
+        draw_text("JayJan", font, (255,255,255),195,60, display)
         display.blit(snake, (370,240))
         display.blit(snake_lft, (0, 240))
         display.blit(player[frame], (150, 187))
@@ -322,7 +339,7 @@ def main():
             if click:
                 circles.clear()
                 entities = []
-                completed = load_level("Map/map.txt")
+                completed = load_level("Map/level_0.txt")
                 if completed == 0:
                     print("Level 1 done")
                 else:

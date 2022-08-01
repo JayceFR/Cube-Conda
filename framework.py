@@ -332,14 +332,15 @@ class MapFetcher():
         for row in data:
             self.map.append((list(row)))
 
-    def draw_map(self, screen, grass, dirt1, dirt2, scroll):
+    def draw_map(self, screen, grass, dirt1, dirt2, up_arrow, scroll):
         y = 0
         tile_rects = []
         enemy_spawn_loc = []
         key_spawn_loc = []
         snake_spawn_loc = []
         door_loc = []
-
+        end = []
+        text_loc = []
         for row in self.map:
             x = 0
             for tile in row:
@@ -357,12 +358,19 @@ class MapFetcher():
                     snake_spawn_loc.append(list((x*16, y*16)))
                 if tile == "7":
                     door_loc.append(list((x*16, y*16)))
-                if tile != "0" and tile != "5" and tile != "7":
+                if tile == "e":
+                    end.append(list((x*16, y*16)))
+                if tile == "m":
+                    text_loc.append(list((x* 16, y * 16)))
+                    screen.blit(dirt2, (x * 16 - scroll[0], y * 16 - scroll[1]))
+                if tile == "u":
+                    screen.blit(up_arrow, (x * 16 - scroll[0], y * 16 - scroll[1]))
+                if tile != "0" and tile != "5" and tile != "7" and tile != "e" and tile != "u" and tile != "6":
                     tile_rects.append(pygame.Rect(x * 16, y * 16, 16, 16))
                 x = x + 1
             y = y + 1
 
-        return tile_rects, enemy_spawn_loc, key_spawn_loc, snake_spawn_loc, door_loc
+        return tile_rects, enemy_spawn_loc, key_spawn_loc, snake_spawn_loc, door_loc, end, text_loc
 
 
 class Entity():
