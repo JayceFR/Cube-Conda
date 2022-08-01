@@ -139,7 +139,7 @@ class Player():
                         if self.air_timer < 6:
                             gravity = -60
 
-                self.movement[1] += gravity * dt
+                self.movement[1] += gravity
                 gravity += 0.2
                 if gravity > 8:
                     gravity = 8
@@ -294,7 +294,6 @@ class Enemy():
         return self.colors[random.randint(0, 5)][0]
 
     def draw(self, display, scroll, screen_height, dt):
-        print(dt)
         self.display_x = self.rect.x
         self.display_y = self.rect.y
         self.rect.x -= scroll[0]
@@ -307,11 +306,11 @@ class Enemy():
         self.rect.x = self.display_x
         self.rect.y = self.display_y
         if self.type == 1:
-            self.rect.y += self.speed * dt
+            self.rect.y += self.speed + dt
             if self.rect.y > screen_height + 200:
                 self.alive = False
         if self.type == 0:
-            self.rect.x -= self.speed * dt
+            self.rect.x -= self.speed + dt
             if self.rect.x < 0:
                 self.alive = False
 
