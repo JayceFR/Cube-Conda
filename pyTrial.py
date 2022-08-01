@@ -9,6 +9,7 @@ import sys
 import random
 import math
 from fps import *
+import time as t
 
 pygame.init()
 screen_width = 1000
@@ -23,6 +24,7 @@ entities = []
 enemies = []
 snakes = []
 clock = pygame.time.Clock()
+
 
 
 def get_color():
@@ -59,6 +61,7 @@ def get_image(sheet, frame, width, height, scale):
 
 
 def load_level(level):
+    last_time = t.time()
     enemies.clear()
     snakes.clear()
     entities.clear()
@@ -115,6 +118,9 @@ def load_level(level):
         clock.tick(frames_per_sec.get_fps())
         ticks = pygame.time.get_ticks()
         ticks_after_death += 1
+        dt = t.time() - last_time
+        dt *= 60
+        last_time = t.time()
         if key_spawn_loc != []:
             if create == 0:
                 create = 1
@@ -165,7 +171,7 @@ def load_level(level):
                     p.change_state(game_map, current_time)
         game_map, enemy_spawn_loc, key_spawn_loc1, snake_spawn_loc, door_loc = m.draw_map(display, grass, dirt1, dirt2,
                                                                                           scroll)
-        p.move(5, game_map, current_time)
+        p.move(5, game_map, current_time, dt)
         p.draw(display, scroll)
         draw_timer(display, cube_time, 20, 20)
         door.draw(display, scroll)
@@ -189,7 +195,7 @@ def load_level(level):
                     level_over = True
             if enemies != []:
                 for e, enemy in sorted(enumerate(enemies), reverse=True):
-                    enemy.draw(display, scroll, screen_height / 2)
+                    enemy.draw(display, scroll, screen_height / 2, dt)
                     if enemy.get_rect().colliderect(p.special_get_rect()):
                         p.alive = False
                         sparks_x = enemy.get_rect().x - scroll[0]
@@ -199,7 +205,7 @@ def load_level(level):
                         enemies.pop(e)
             if snakes != []:
                 for s, snake in sorted(enumerate(snakes), reverse=True):
-                    snake.draw(display, scroll, screen_height / 2)
+                    snake.draw(display, scroll, screen_height / 2, dt)
                     if snake.get_rect().colliderect(p.special_get_rect()):
                         p.alive = False
                         sparks_x = snake.get_rect().x - scroll[0]

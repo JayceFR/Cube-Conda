@@ -89,19 +89,19 @@ class Player():
                 self.cube_rect.x = self.display_x
                 self.cube_rect.y = self.display_y
 
-    def move(self, gravity, tiles, current_time):
+    def move(self, gravity, tiles, current_time, dt = 1):
         if self.alive:
             if self.state == "player":
                 self.movement = [0, 0]
                 if self.moving_right:
-                    self.movement[0] += 4
+                    self.movement[0] += 4 * dt
                     self.running = True
                     self.moving_right = False
                     if self.facing_left:
                         self.facing_right = True
                         self.facing_left = False
                 if self.moving_left:
-                    self.movement[0] -= 4
+                    self.movement[0] -= 4 * dt
                     self.running = True
                     self.moving_left = False
                     if self.facing_right:
@@ -139,7 +139,7 @@ class Player():
                         if self.air_timer < 6:
                             gravity = -60
 
-                self.movement[1] += gravity
+                self.movement[1] += gravity * dt
                 gravity += 0.2
                 if gravity > 8:
                     gravity = 8
@@ -151,16 +151,16 @@ class Player():
             if self.state == "cube":
                 self.cube_movement = [0, 0]
                 if self.cube_moving_right:
-                    self.cube_movement[0] += self.speed
+                    self.cube_movement[0] += self.speed * dt
                     self.cube_moving_right = False
                 if self.cube_moving_left:
-                    self.cube_movement[0] -= self.speed
+                    self.cube_movement[0] -= self.speed * dt
                     self.cube_moving_left = False
                 if self.cube_moving_down:
-                    self.cube_movement[1] += self.speed
+                    self.cube_movement[1] += self.speed * dt
                     self.cube_moving_down = False
                 if self.cube_moving_up:
-                    self.cube_movement[1] -= self.speed
+                    self.cube_movement[1] -= self.speed * dt
                     self.cube_moving_up = False
 
                 key = pygame.key.get_pressed()
@@ -293,7 +293,8 @@ class Enemy():
     def get_color(self):
         return self.colors[random.randint(0, 5)][0]
 
-    def draw(self, display, scroll, screen_height):
+    def draw(self, display, scroll, screen_height, dt):
+        print(dt)
         self.display_x = self.rect.x
         self.display_y = self.rect.y
         self.rect.x -= scroll[0]
@@ -306,11 +307,11 @@ class Enemy():
         self.rect.x = self.display_x
         self.rect.y = self.display_y
         if self.type == 1:
-            self.rect.y += self.speed
+            self.rect.y += self.speed * dt
             if self.rect.y > screen_height + 200:
                 self.alive = False
         if self.type == 0:
-            self.rect.x -= self.speed
+            self.rect.x -= self.speed * dt
             if self.rect.x < 0:
                 self.alive = False
 
