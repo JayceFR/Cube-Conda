@@ -114,7 +114,7 @@ def load_level(level):
     p = framework.Player(50, 70, 32, 32, (255, 0, 0), 4, "player", cube_img, player_idle_spritesheet,
                          player_run_spritesheet, player_jump_spritesheet)
     while run:
-        display.fill((100, 100, 255))
+        display.fill((98, 255, 242))
         clock.tick(frames_per_sec.get_fps())
         ticks = pygame.time.get_ticks()
         ticks_after_death += 1
@@ -261,7 +261,7 @@ def main():
     snake_lft.set_colorkey((255,255,255))
     font = pygame.font.Font("Fonts/jayce.ttf", 30)
     font2 = pygame.font.Font("Fonts/jayce.ttf", 60)
-    inside_color = [(255, 0, 255)]
+    inside_color = [(255, 0, 102)]
     outside_color = [(10, 10, 10)]
     player_idle_spritesheet = pygame.image.load("Sprites/player_idle.png").convert_alpha()
     player = []
@@ -270,37 +270,54 @@ def main():
     frame = 0
     last_update = 0
     animation_delay = 300
+    circle_last_update = 0
+    circle_animation_delay = 100
     completed = -1
     text_x = 220
+    text_y = 252
     click = False
     text = "PLAY"
+    circles = []
+    #location, radius
     while run:
-        display.fill((50, 10, 10))
+        display.fill((0, 0, 0))
         time = pygame.time.get_ticks()
         if time - last_update > animation_delay:
             frame+=1
             if frame >= 3:
                 frame = 0
             last_update = time
+        if time - circle_last_update > circle_animation_delay:
+            circles.append(list((list((random.randint(0, 1000) / 2, random.randint(0, 300) / 2)), random.randint(7, 10))))
         mx, my = pygame.mouse.get_pos()
         mx = mx / 2
         my = my / 2
+        # Circles
+        for circle in sorted(circles, reverse= True):
+            pygame.draw.circle(display, (255, 0, 102), (circle[0][0], circle[0][1]), circle[1])
+            pygame.draw.circle(display, (0,0,0), (circle[0][0], circle[0][1]), circle[1] - 2)
+            circle[0][1] += 1.5
+            circle[1] -= 0.2
+            if circle[1] <= 0:
+                circles.remove(circle)
         play_btn_outline = pygame.Rect(150, 250, 200, 50)
         pygame.draw.rect(display, outside_color[0], play_btn_outline, 20, 50)
         play_btn_inside = pygame.Rect(157, 255, 185, 35)
         pygame.draw.rect(display, inside_color[0], play_btn_inside, 0, 50)
-        draw_text(text, font, (255, 255, 255), text_x, 252)
+        draw_text(text, font, (255, 255, 255), text_x, text_y)
         draw_text("CUBE  CONDA", font2, (255,255,255), 100, 10)
         draw_text("JayJan", font, (255,255,255),195,60)
         display.blit(snake, (370,240))
         display.blit(snake_lft, (0, 240))
         display.blit(player[frame], (150, 187))
+
         if play_btn_inside.collidepoint(mx, my):
             inside_color.clear()
             inside_color.append((10, 10, 10))
             outside_color.clear()
             outside_color.append((255, 0, 255))
             if click:
+                circles.clear()
                 entities = []
                 completed = load_level("Map/map.txt")
                 if completed == 0:
