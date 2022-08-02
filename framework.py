@@ -54,6 +54,7 @@ class Player():
         # self.l.draw(display)
         if self.alive:
             if self.state == "player":
+                self.rect.width = 21
                 self.display_x = self.rect.x
                 self.display_y = self.rect.y
                 self.rect.x = self.rect.x - scroll[0]
@@ -365,7 +366,7 @@ class MapFetcher():
                     screen.blit(dirt2, (x * 16 - scroll[0], y * 16 - scroll[1]))
                 if tile == "u":
                     screen.blit(up_arrow, (x * 16 - scroll[0], y * 16 - scroll[1]))
-                if tile != "0" and tile != "5" and tile != "7" and tile != "e" and tile != "u" and tile != "6":
+                if tile != "0" and tile != "5" and tile != "7" and tile != "e" and tile != "u":
                     tile_rects.append(pygame.Rect(x * 16, y * 16, 16, 16))
                 x = x + 1
             y = y + 1

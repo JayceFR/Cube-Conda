@@ -94,6 +94,8 @@ def load_level(level, snake_loading_time_delay):
     snake_loading_last_update = 0
     snake_loading_delay = snake_loading_time_delay
     cube_time = 100
+    snake_home = pygame.image.load("Sprites/cube.png")
+    snake_home.set_colorkey((255,255,255))
     # sparks.append(framework.Spark([700, 250], math.radians(random.randint(0, 360)), random.randint(1, 3), (0, 255, 0), 1))
     m = framework.MapFetcher(level)
     m.fetch_map()
@@ -150,10 +152,14 @@ def load_level(level, snake_loading_time_delay):
                 for enemy_loc in enemy_spawn_loc:
                     load_enemy(enemy_loc[0], enemy_loc[1])
             enemy_load_last_update = ticks
+
+        display.blit(snake_home, (snake_spawn_loc[0][0] - scroll[0], snake_spawn_loc[0][1] - scroll[1] - 15))
+
         if level == "Map/level_0.txt":
             if p.special_get_rect().x >= 1100:
                 summon += 1
                 if summon == 1:
+                    screen_shake = 30
                     for snake_loc in snake_spawn_loc:
                         load_snake(snake_loc[0], snake_loc[1])
         else:
@@ -321,11 +327,11 @@ def main():
     text = "PLAY"
     circles = []
     level = 0
-    levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level2.txt", "Map/level_3.txt"]
-    #levels = ["Map/level_1.txt"]
+    levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level_2.txt", "Map/level_3.txt"]
+    #levels = ["Map/level_2.txt"]
     snake_loading_time_delays = [5000, 10000, 9000, 8000]
     completed_levels = [-1, -1, -1, -1]
-    #snake_loading_time_delays = 10000
+    #snake_loading_time_delays = [10000]
     #location, radius
     while run:
         display.fill((0, 0, 0))
