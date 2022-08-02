@@ -298,6 +298,9 @@ def main():
     click = False
     text = "PLAY"
     circles = []
+    level = 0
+    levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level2.txt" "Map/level_3.txt"]
+    #levels = ["Map/level_1.txt"]
     #location, radius
     while run:
         display.fill((0, 0, 0))
@@ -339,9 +342,11 @@ def main():
             if click:
                 circles.clear()
                 entities = []
-                completed = load_level("Map/level_0.txt")
+                completed = load_level(levels[level])
                 if completed == 0:
-                    print("Level 1 done")
+                    level += 1
+                    completed = -1
+                    completed = load_level(levels[level])
                 else:
                     text = "RETRY"
                     text_x = 210

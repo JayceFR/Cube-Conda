@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="added cube in menu">
-      <change afterPath="$PROJECT_DIR$/Map/level_0.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sprites/Up_Arrow.png" afterDir="false" />
+    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="Added tutorial level">
+      <change afterPath="$PROJECT_DIR$/Map/level_1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Map/level_2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Map/map.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Map/level_3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyTrial.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyTrial.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +143,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659369865456</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Did the tutorial level">
+      <created>1659381155134</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659381155134</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added tutorial level">
+      <created>1659381261616</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1659381261616</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,6 +179,8 @@
     <MESSAGE value="added snakes in menu" />
     <MESSAGE value="fixed map and improved on the menu" />
     <MESSAGE value="added cube in menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="added cube in menu" />
+    <MESSAGE value="Did the tutorial level" />
+    <MESSAGE value="Added tutorial level" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tutorial level" />
   </component>
 </project>
