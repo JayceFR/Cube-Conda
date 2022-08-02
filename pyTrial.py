@@ -297,6 +297,9 @@ def draw_text(text, font, text_col, x, y, display):
 
 def main():
     run = True
+    #https://www.beepbox.co/#9n31s6k0l00e03t2ma7g0fj07r1i0o432T1v1u66f0q0x10p51d08A5F4B5Q1753Pca88E4b762863877T5v1u43f0qwx10n511d03HT_QT_ItRAJJAAzh0E1b7T1v1ub4f20o72laq011d23A5F4B3Q0001Pfca8E362963479T4v1uf0f0q011z6666ji8k8k3jSBKSJJAArriiiiii07JCABrzrrrrrrr00YrkqHrsrrrrjr005zrAqzrjzrrqr1jRjrqGGrrzsrsA099ijrABJJJIAzrrtirqrqjqixzsrAjrqjiqaqqysttAJqjikikrizrHtBJJAzArzrIsRCITKSS099ijrAJS____Qg99habbCAYrDzh00E0b4h400000000PcM000000014h000000004h400000000p21nISnQG8Sr5Ml4RfcCkFILJdvF02CzVgc3j8i1vpohTmRAt8aqf36n05Y6hQBY4hMdw2hFEN2OQzGGwaOeSYLLw00
+    #https://www.beepbox.co/#9n31s6k0l00e07t2ma7g0fj07r1i0o332T1v1u17f0q00d03A1F0B0Q200ePb793E3617628637T1v1ub2f10k8q011d23A0F1B8Q0000Pe600E179T5v1ua6f10i8q8141d23HYr901i8ah00000h0E0T2v1u15f10w4qw02d03w0E0b4h4y8w00000h4g000000014h000000004h400000000p1DFK3MjdMuw0PrLo1jjh-aGqAR_B6lnjnCk000000
+    bmusic = pygame.mixer.Sound("Music/trial_song.wav")
     snake = pygame.image.load("Sprites/snake.png").convert_alpha()
     snake = pygame.transform.scale(snake, (snake.get_width()* 5, snake.get_height() * 5))
     snake.set_colorkey((255, 255, 255))
