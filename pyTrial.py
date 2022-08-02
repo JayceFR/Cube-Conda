@@ -70,6 +70,7 @@ def load_level(level):
     time = 1
     sparks_x = 0
     sparks_y = 0
+    danger = False
     enemy_loading_time_delay = 500
     enemy_load_last_update = 0
     grass = pygame.image.load("Tiles/grass.png").convert_alpha()
@@ -107,7 +108,10 @@ def load_level(level):
     time_after_death = 0
     death_time_delay = 100
     summon = 0
+    danger_sign = pygame.image.load("Sprites/Danger_sign.png").convert_alpha()
+    danger_sign.set_colorkey((255,255,255))
     level_over = False
+    screen_shake = 0
     game_map, enemy_spawn_loc, key_spawn_loc, snake_spawn_loc, door_loc, end, text_loc = m.draw_map(display, grass, dirt1, dirt2, up_arrow, scroll)
     font = pygame.font.Font("Fonts/jayce.ttf", 16)
     door_img = pygame.image.load("Sprites/door.png")
@@ -157,7 +161,11 @@ def load_level(level):
                 if snake_spawn_loc != []:
                     for snake_loc in snake_spawn_loc:
                         load_snake(snake_loc[0], snake_loc[1])
+                screen_shake = 30
                 snake_loading_last_update = ticks
+
+        if screen_shake > 0:
+            screen_shake -= 1
 
         if p.get_state() == "player":
             true_scroll[0] += (p.get_rect().x - true_scroll[0] - 262) / 20
@@ -184,6 +192,20 @@ def load_level(level):
         if text_loc != []:
             for te, text in enumerate(text_loc):
                 draw_text(tutorial_text[te], font, (255,255,255), text[0] - scroll[0], text[1] - scroll[1], display)
+
+        if screen_shake:
+            danger = True
+            scroll[0] += random.randint(1, 4) - 2
+            scroll[1] += random.randint(1,4) - 2
+        else:
+            danger = False
+
+
+        if danger:
+            display.blit(danger_sign, (170, 24))
+            draw_text(" Conda Incoming", font, (255, 0, 0), 185, 20, display)
+            display.blit(danger_sign, (295, 24))
+
         p.move(5, game_map, current_time, dt)
         p.draw(display, scroll)
         draw_timer(display, cube_time, 20, 20)
@@ -291,7 +313,7 @@ def main():
     last_update = 0
     animation_delay = 300
     circle_last_update = 0
-    circle_animation_delay = 100
+    circle_animation_delay = 50
     completed = -1
     text_x = 220
     text_y = 252
@@ -299,8 +321,8 @@ def main():
     text = "PLAY"
     circles = []
     level = 0
-    levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level2.txt" "Map/level_3.txt"]
-    #levels = ["Map/level_1.txt"]
+    #levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level2.txt" "Map/level_3.txt"]
+    levels = ["Map/level_1.txt"]
     #location, radius
     while run:
         display.fill((0, 0, 0))
@@ -311,17 +333,20 @@ def main():
                 frame = 0
             last_update = time
         if time - circle_last_update > circle_animation_delay:
-            circles.append(list((list((random.randint(0, 1000) / 2, random.randint(0, 300) / 2)), random.randint(7, 10))))
+            circles.append(list((list((random.randint(0, 1000) / 2, random.randint(0, 1) )), random.randint(1,2), get_color())))
+            circle_last_update = time
         mx, my = pygame.mouse.get_pos()
         mx = mx / 2
         my = my / 2
         # Circles
         for circle in sorted(circles, reverse= True):
-            pygame.draw.circle(display, (255, 0, 102), (circle[0][0], circle[0][1]), circle[1])
+            pygame.draw.circle(display, circle[2], (circle[0][0], circle[0][1]), circle[1])
             pygame.draw.circle(display, (0,0,0), (circle[0][0], circle[0][1]), circle[1] - 2)
-            circle[0][1] += 1
-            circle[1] -= 0.1
+            circle[0][1] += 0.5
+            #circle[1] -= 0.1
             if circle[1] <= 0:
+                circles.remove(circle)
+            if circle[0][1] > 300:
                 circles.remove(circle)
         play_btn_outline = pygame.Rect(150, 250, 200, 50)
         pygame.draw.rect(display, outside_color[0], play_btn_outline, 20, 50)

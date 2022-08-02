@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="Added tutorial level">
-      <change afterPath="$PROJECT_DIR$/Map/level_1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Map/level_2.txt" afterDir="false" />
+    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="Added levels">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Map/level_3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map/level_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Map/level_1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyTrial.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyTrial.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659381261616</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added levels">
+      <created>1659428953125</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1659428953125</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,6 +186,7 @@
     <MESSAGE value="added cube in menu" />
     <MESSAGE value="Did the tutorial level" />
     <MESSAGE value="Added tutorial level" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added tutorial level" />
+    <MESSAGE value="Added levels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added levels" />
   </component>
 </project>
