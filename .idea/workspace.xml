@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="Added levels">
+    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="Added Conda Incoming Warning">
+      <change afterPath="$PROJECT_DIR$/Sprites/Danger_sign.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map/level_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Map/level_1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyTrial.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyTrial.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -162,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659428953125</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added Conda Incoming Warning">
+      <created>1659437359183</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659437359183</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,6 +194,7 @@
     <MESSAGE value="Did the tutorial level" />
     <MESSAGE value="Added tutorial level" />
     <MESSAGE value="Added levels" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added levels" />
+    <MESSAGE value="Added Conda Incoming Warning" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Conda Incoming Warning" />
   </component>
 </project>

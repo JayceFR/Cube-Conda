@@ -60,7 +60,7 @@ def get_image(sheet, frame, width, height, scale):
     return image
 
 
-def load_level(level):
+def load_level(level, snake_loading_time_delay):
     last_time = t.time()
     enemies.clear()
     snakes.clear()
@@ -92,7 +92,7 @@ def load_level(level):
     circle_radius = 5
     cube_time_limit = 100
     snake_loading_last_update = 0
-    snake_loading_delay = 5000
+    snake_loading_delay = snake_loading_time_delay
     cube_time = 100
     # sparks.append(framework.Spark([700, 250], math.radians(random.randint(0, 360)), random.randint(1, 3), (0, 255, 0), 1))
     m = framework.MapFetcher(level)
@@ -321,8 +321,11 @@ def main():
     text = "PLAY"
     circles = []
     level = 0
-    #levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level2.txt" "Map/level_3.txt"]
-    levels = ["Map/level_1.txt"]
+    levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level2.txt", "Map/level_3.txt"]
+    #levels = ["Map/level_1.txt"]
+    snake_loading_time_delays = [5000, 10000, 9000, 8000]
+    completed_levels = [-1, -1, -1, -1]
+    #snake_loading_time_delays = 10000
     #location, radius
     while run:
         display.fill((0, 0, 0))
@@ -367,11 +370,11 @@ def main():
             if click:
                 circles.clear()
                 entities = []
-                completed = load_level(levels[level])
-                if completed == 0:
+                completed_levels[level] = load_level(levels[level], snake_loading_time_delays[level])
+                if completed_levels[level] == 0:
+                    text = "Next Level!"
+                    text_x = 180
                     level += 1
-                    completed = -1
-                    completed = load_level(levels[level])
                 else:
                     text = "RETRY"
                     text_x = 210
