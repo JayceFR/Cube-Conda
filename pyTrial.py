@@ -119,6 +119,7 @@ def load_level(level, snake_loading_time_delay):
     door_img = pygame.image.load("Sprites/door.png")
     door_img.set_colorkey((116, 68, 56))
     door_img = pygame.transform.scale(door_img, (door_img.get_height() * 3, door_img.get_width() * 3))
+    backgrounds_objects = [[0.25, [120,10,70,400]], [0.25, [280,30,40,400]], [0.25, [400,30,40,400]],[0.25, [600,30,40,400]], [0.25, [700,30,40,400]],  [0.5,[30,40,40,400]], [0.5, [130, 90, 100, 400]], [0.5, [300,80,120,400]], [0.5, [470,100,70,200]], [0.5, [600, 90, 60, 500]], [0.5, [700, 100, 100, 300]], [0.5, [812, 40, 40, 400]], [0.5, [900, 60, 80, 400]], [0.5, [1100, 30, 60, 500]]]
     door = framework.Entity(door_img.get_height(), door_img.get_width(), door_loc[0][0] - 16 * 2, door_loc[0][1] - 24,
                             door_img)
     p = framework.Player(50, 70, 32, 32, (255, 0, 0), 4, "player", cube_img, player_idle_spritesheet,
@@ -131,6 +132,13 @@ def load_level(level, snake_loading_time_delay):
         dt = t.time() - last_time
         dt *= 60
         last_time = t.time()
+        pygame.draw.rect(display, (7,80,75), pygame.Rect(0,180,1000,120))
+        for backgrounds_object in backgrounds_objects:
+            obj_rect = pygame.Rect(backgrounds_object[1][0] - scroll[0] * backgrounds_object[0], backgrounds_object[1][1] - scroll[1] * backgrounds_object[0], backgrounds_object[1][2], backgrounds_object[1][3])
+            if backgrounds_object[0] == 0.5:
+                pygame.draw.rect(display, (14,222,150), obj_rect)
+            else:
+                pygame.draw.rect(display, (9, 91, 85), obj_rect)
         if key_spawn_loc != []:
             if create == 0:
                 create = 1
@@ -299,7 +307,7 @@ def main():
     run = True
     #https://www.beepbox.co/#9n31s6k0l00e03t2ma7g0fj07r1i0o432T1v1u66f0q0x10p51d08A5F4B5Q1753Pca88E4b762863877T5v1u43f0qwx10n511d03HT_QT_ItRAJJAAzh0E1b7T1v1ub4f20o72laq011d23A5F4B3Q0001Pfca8E362963479T4v1uf0f0q011z6666ji8k8k3jSBKSJJAArriiiiii07JCABrzrrrrrrr00YrkqHrsrrrrjr005zrAqzrjzrrqr1jRjrqGGrrzsrsA099ijrABJJJIAzrrtirqrqjqixzsrAjrqjiqaqqysttAJqjikikrizrHtBJJAzArzrIsRCITKSS099ijrAJS____Qg99habbCAYrDzh00E0b4h400000000PcM000000014h000000004h400000000p21nISnQG8Sr5Ml4RfcCkFILJdvF02CzVgc3j8i1vpohTmRAt8aqf36n05Y6hQBY4hMdw2hFEN2OQzGGwaOeSYLLw00
     #https://www.beepbox.co/#9n31s6k0l00e07t2ma7g0fj07r1i0o332T1v1u17f0q00d03A1F0B0Q200ePb793E3617628637T1v1ub2f10k8q011d23A0F1B8Q0000Pe600E179T5v1ua6f10i8q8141d23HYr901i8ah00000h0E0T2v1u15f10w4qw02d03w0E0b4h4y8w00000h4g000000014h000000004h400000000p1DFK3MjdMuw0PrLo1jjh-aGqAR_B6lnjnCk000000
-    bmusic = pygame.mixer.Sound("Music/trial_song.wav")
+    #bmusic = pygame.mixer.Sound("Music/trial_song.wav")
     snake = pygame.image.load("Sprites/snake.png").convert_alpha()
     snake = pygame.transform.scale(snake, (snake.get_width()* 5, snake.get_height() * 5))
     snake.set_colorkey((255, 255, 255))

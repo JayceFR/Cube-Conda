@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="Fixed Level2">
+    <list default="true" id="4a51fba8-67be-4437-9ed7-702f3f6abc84" name="Changes" comment="Adding Song Trial">
+      <change afterPath="$PROJECT_DIR$/Music/trial_song.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyTrial.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyTrial.py" afterDir="false" />
     </list>
@@ -189,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659453101652</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Adding Song Trial">
+      <created>1659469575187</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1659469575187</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -218,6 +226,7 @@
     <MESSAGE value="Fixed Level Generator" />
     <MESSAGE value="Added level 2 and 3" />
     <MESSAGE value="Fixed Level2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Level2" />
+    <MESSAGE value="Adding Song Trial" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Song Trial" />
   </component>
 </project>
