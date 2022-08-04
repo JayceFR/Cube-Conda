@@ -339,7 +339,7 @@ def main():
     circles = []
     level = 0
     levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level_2.txt", "Map/level_3.txt"]
-    #levels = ["Map/level_2.txt"]
+    #levels = ["Map/level_3.txt"]
     snake_loading_time_delays = [5000, 10000, 9000, 8000]
     completed_levels = [-1, -1, -1, -1]
     #snake_loading_time_delays = [10000]
