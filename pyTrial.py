@@ -19,12 +19,18 @@ display = pygame.Surface((screen_width / 2, screen_height / 2))
 
 pygame.display.set_caption("Cube Conda")
 
+#sounds
+death_song = pygame.mixer.Sound("Music/death_song2.wav")
+key_pickup = pygame.mixer.Sound("Music/key_pickup.wav")
+death_song.set_volume(0.5)
+change = pygame.mixer.Sound("Music/change.wav")
+change.set_volume(0.1)
+
 clientNumber = 0
 entities = []
 enemies = []
 snakes = []
 clock = pygame.time.Clock()
-
 
 
 def get_color():
@@ -149,6 +155,7 @@ def load_level(level, snake_loading_time_delay):
                     if entity.get_rect().colliderect(p.get_rect()):
                         entities.remove(entity)
                         if list((entity.x, entity.y)) in key_spawn_loc:
+                            key_pickup.play()
                             key_spawn_loc.remove(list((entity.x, entity.y)))
                         for x in range(20):
                             sparks.append(framework.Spark([entity.get_rect().x - scroll[0], p.get_rect().y - scroll[1]],
@@ -200,6 +207,7 @@ def load_level(level, snake_loading_time_delay):
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_j:
+                    change.play()
                     p.change_state(game_map, current_time)
         game_map, enemy_spawn_loc, key_spawn_loc1, snake_spawn_loc, door_loc, end, text_loc = m.draw_map(display, grass, dirt1, dirt2, up_arrow,
                                                                                           scroll)
@@ -266,12 +274,14 @@ def load_level(level, snake_loading_time_delay):
                     if not snake.alive:
                         snakes.pop(s)
         else:
+            
             if not level_over:
                 if ticks_after_death - time_after_death > death_time_delay:
                     del p
                     del door
                     return 1
                 if time == 1:
+                    death_song.play()
                     for x in range(50):
                         time += 1
                         sparks.append(framework.Spark([sparks_x, sparks_y],
@@ -304,6 +314,7 @@ def draw_text(text, font, text_col, x, y, display):
 
 
 def main():
+    pygame.mixer.music.load("Music/trial_song.wav")
     run = True
     #https://www.beepbox.co/#9n31s6k0l00e03t2ma7g0fj07r1i0o432T1v1u66f0q0x10p51d08A5F4B5Q1753Pca88E4b762863877T5v1u43f0qwx10n511d03HT_QT_ItRAJJAAzh0E1b7T1v1ub4f20o72laq011d23A5F4B3Q0001Pfca8E362963479T4v1uf0f0q011z6666ji8k8k3jSBKSJJAArriiiiii07JCABrzrrrrrrr00YrkqHrsrrrrjr005zrAqzrjzrrqr1jRjrqGGrrzsrsA099ijrABJJJIAzrrtirqrqjqixzsrAjrqjiqaqqysttAJqjikikrizrHtBJJAzArzrIsRCITKSS099ijrAJS____Qg99habbCAYrDzh00E0b4h400000000PcM000000014h000000004h400000000p21nISnQG8Sr5Ml4RfcCkFILJdvF02CzVgc3j8i1vpohTmRAt8aqf36n05Y6hQBY4hMdw2hFEN2OQzGGwaOeSYLLw00
     #https://www.beepbox.co/#9n31s6k0l00e07t2ma7g0fj07r1i0o332T1v1u17f0q00d03A1F0B0Q200ePb793E3617628637T1v1ub2f10k8q011d23A0F1B8Q0000Pe600E179T5v1ua6f10i8q8141d23HYr901i8ah00000h0E0T2v1u15f10w4qw02d03w0E0b4h4y8w00000h4g000000014h000000004h400000000p1DFK3MjdMuw0PrLo1jjh-aGqAR_B6lnjnCk000000
@@ -338,6 +349,7 @@ def main():
     text = "PLAY"
     circles = []
     level = 0
+    music_player = 0
     levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level_2.txt", "Map/level_3.txt"]
     #levels = ["Map/level_3.txt"]
     snake_loading_time_delays = [5000, 10000, 9000, 8000]
@@ -345,6 +357,9 @@ def main():
     #snake_loading_time_delays = [10000]
     #location, radius
     while run:
+        if music_player == 0:
+            pygame.mixer.music.play(-1)
+            music_player = 1
         display.fill((0, 0, 0))
         time = pygame.time.get_ticks()
         if time - last_update > animation_delay:
@@ -385,14 +400,17 @@ def main():
             outside_color.clear()
             outside_color.append((255, 0, 255))
             if click:
+                pygame.mixer.music.stop()
                 circles.clear()
                 entities = []
                 completed_levels[level] = load_level(levels[level], snake_loading_time_delays[level])
                 if completed_levels[level] == 0:
+                    music_player = 0
                     text = "Next Level!"
                     text_x = 180
                     level += 1
                 else:
+                    music_player = 0
                     text = "RETRY"
                     text_x = 210
         else:
