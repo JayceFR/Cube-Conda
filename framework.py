@@ -28,6 +28,7 @@ class Player():
         self.facing_left = False
         self.display_x = 0
         self.display_y = 0
+        self.jump_sound_to_play = 0
         self.cube_rect = pygame.Rect(x, y, cube_img.get_width(), cube_img.get_height())
         self.cube_movement = [0, 0]
         self.cube_moving_right = False
@@ -39,6 +40,7 @@ class Player():
         self.run_animation = []
         self.jump_animation = []
         self.frame = 0
+        self.jump_sound = pygame.mixer.Sound("Music/jump_sound.wav")
         self.frame_cooldown = 150
         for x in range(0, 3):
             self.idle_animation.append(self.get_image(player_idle_spritesheet, x, 32, 32, 1))
@@ -112,6 +114,13 @@ class Player():
                 if self.movement[0] == 0:
                     self.running = False
                     self.running = False
+
+                if not self.jump:
+                    self.jump_sound_to_play = 0
+                else:
+                    if self.jump_sound_to_play == 0:
+                        self.jump_sound.play()
+                        self.jump_sound_to_play = -1
 
                 self.idle = True
                 if self.jump:

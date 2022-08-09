@@ -25,6 +25,11 @@ key_pickup = pygame.mixer.Sound("Music/key_pickup.wav")
 death_song.set_volume(0.5)
 change = pygame.mixer.Sound("Music/change.wav")
 change.set_volume(0.1)
+snake_alarm = pygame.mixer.Sound("Music/snake_alarm.wav")
+
+#music
+pygame.mixer.music.load("Music/music.wav")
+pygame.mixer.music.play(-1)
 
 clientNumber = 0
 entities = []
@@ -95,6 +100,7 @@ def load_level(level, snake_loading_time_delay):
     scroll = [0, 0]
     sparks = []
     create = 0
+    danger_song = -1
     circle_radius = 5
     cube_time_limit = 100
     snake_loading_last_update = 0
@@ -174,6 +180,7 @@ def load_level(level, snake_loading_time_delay):
             if p.special_get_rect().x >= 1100:
                 summon += 1
                 if summon == 1:
+                    danger_song = 0
                     screen_shake = 30
                     for snake_loc in snake_spawn_loc:
                         load_snake(snake_loc[0], snake_loc[1])
@@ -182,8 +189,13 @@ def load_level(level, snake_loading_time_delay):
                 if snake_spawn_loc != []:
                     for snake_loc in snake_spawn_loc:
                         load_snake(snake_loc[0], snake_loc[1])
+                danger_song = 0
                 screen_shake = 30
                 snake_loading_last_update = ticks
+
+        if danger_song == 0:
+            snake_alarm.play()
+            danger_song = -1
 
         if screen_shake > 0:
             screen_shake -= 1
@@ -225,7 +237,7 @@ def load_level(level, snake_loading_time_delay):
 
         if danger:
             display.blit(danger_sign, (170, 24))
-            draw_text(" Conda Incoming", font, (255, 0, 0), 185, 20, display)
+            draw_text(" CONDA RELEASED", font, (255, 0, 0), 185, 20, display)
             display.blit(danger_sign, (295, 24))
 
         p.move(5, game_map, current_time, dt)
@@ -274,7 +286,6 @@ def load_level(level, snake_loading_time_delay):
                     if not snake.alive:
                         snakes.pop(s)
         else:
-            
             if not level_over:
                 if ticks_after_death - time_after_death > death_time_delay:
                     del p
@@ -314,7 +325,6 @@ def draw_text(text, font, text_col, x, y, display):
 
 
 def main():
-    pygame.mixer.music.load("Music/trial_song.wav")
     run = True
     #https://www.beepbox.co/#9n31s6k0l00e03t2ma7g0fj07r1i0o432T1v1u66f0q0x10p51d08A5F4B5Q1753Pca88E4b762863877T5v1u43f0qwx10n511d03HT_QT_ItRAJJAAzh0E1b7T1v1ub4f20o72laq011d23A5F4B3Q0001Pfca8E362963479T4v1uf0f0q011z6666ji8k8k3jSBKSJJAArriiiiii07JCABrzrrrrrrr00YrkqHrsrrrrjr005zrAqzrjzrrqr1jRjrqGGrrzsrsA099ijrABJJJIAzrrtirqrqjqixzsrAjrqjiqaqqysttAJqjikikrizrHtBJJAzArzrIsRCITKSS099ijrAJS____Qg99habbCAYrDzh00E0b4h400000000PcM000000014h000000004h400000000p21nISnQG8Sr5Ml4RfcCkFILJdvF02CzVgc3j8i1vpohTmRAt8aqf36n05Y6hQBY4hMdw2hFEN2OQzGGwaOeSYLLw00
     #https://www.beepbox.co/#9n31s6k0l00e07t2ma7g0fj07r1i0o332T1v1u17f0q00d03A1F0B0Q200ePb793E3617628637T1v1ub2f10k8q011d23A0F1B8Q0000Pe600E179T5v1ua6f10i8q8141d23HYr901i8ah00000h0E0T2v1u15f10w4qw02d03w0E0b4h4y8w00000h4g000000014h000000004h400000000p1DFK3MjdMuw0PrLo1jjh-aGqAR_B6lnjnCk000000
@@ -357,9 +367,6 @@ def main():
     #snake_loading_time_delays = [10000]
     #location, radius
     while run:
-        if music_player == 0:
-            pygame.mixer.music.play(-1)
-            music_player = 1
         display.fill((0, 0, 0))
         time = pygame.time.get_ticks()
         if time - last_update > animation_delay:
@@ -400,17 +407,14 @@ def main():
             outside_color.clear()
             outside_color.append((255, 0, 255))
             if click:
-                pygame.mixer.music.stop()
                 circles.clear()
                 entities = []
                 completed_levels[level] = load_level(levels[level], snake_loading_time_delays[level])
                 if completed_levels[level] == 0:
-                    music_player = 0
                     text = "Next Level!"
                     text_x = 180
                     level += 1
                 else:
-                    music_player = 0
                     text = "RETRY"
                     text_x = 210
         else:
