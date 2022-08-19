@@ -22,13 +22,14 @@ pygame.display.set_caption("Cube Conda")
 #sounds
 death_song = pygame.mixer.Sound("Music/death_song2.wav")
 key_pickup = pygame.mixer.Sound("Music/key_pickup.wav")
-death_song.set_volume(0.5)
+death_song.set_volume(0.3)
 change = pygame.mixer.Sound("Music/change.wav")
 change.set_volume(0.1)
 snake_alarm = pygame.mixer.Sound("Music/snake_alarm.wav")
 
 #music
 pygame.mixer.music.load("Music/music.wav")
+pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
 clientNumber = 0
@@ -361,9 +362,10 @@ def main():
     level = 0
     music_player = 0
     levels = ["Map/level_0.txt", "Map/level_1.txt", "Map/level_2.txt", "Map/level_3.txt"]
-    #levels = ["Map/level_3.txt"]
+    #levels = ["Map/level_0.txt"]
     snake_loading_time_delays = [5000, 10000, 9000, 8000]
     completed_levels = [-1, -1, -1, -1]
+    #completed_levels = [-1]
     #snake_loading_time_delays = [10000]
     #location, radius
     while run:
@@ -401,6 +403,14 @@ def main():
         display.blit(snake_lft, (0, 240))
         display.blit(player[frame], (150, 187))
         display.blit(cube, (210, 194))
+        if completed_levels[len(completed_levels) - 1] == 0:
+            #Game Over
+            draw_text("GAME OVER!", font2, (255, 0, 255), 110, 100, display)
+            text = "Play Again!"
+            text_x = 180
+            level = 0
+            for level in completed_levels:
+                level = -1
         if play_btn_inside.collidepoint(mx, my):
             inside_color.clear()
             inside_color.append((10, 10, 10))
